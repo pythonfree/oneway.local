@@ -1,0 +1,29 @@
+
+
+<div class="aside">
+    <div class="bl_table">
+        <div>
+            <div class="aside__person_img" style="background-image: url(../assets/img/{{ starInfo.main_photo }});"></div>
+            <div class="aside__person_name">{{ starInfo.name }}<span>актриса</span></div>
+            <div class="aside__person_data">
+                <ul>
+                    <li>
+                        <i class="i_icon-1"></i>
+                        <p>{{ starInfo.location }}</p>
+                    </li>
+                    <li>
+                        <i class="i_icon-2"></i>
+                        <p>{{ starBday.b_day }}, 28 лет</p>
+                        <span>2 месяца и 13 дней до ДР</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="aside__person_descr">
+                <p>
+                    {{ starInfo.person_descr }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="aside__background" style="background-image: url(../assets/img/{{ starInfo.main_photo }});"></div>
+</div>
