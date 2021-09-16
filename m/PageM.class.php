@@ -81,11 +81,12 @@ class PageM
         $target = new DateTime(date('Y-m-d'));
         $interval = $origin->diff($target);
         $age = $interval->format('%y');
+        $age = getAgeAppend($age);
 
         //вычисляем сколько осталось месяцев и дней до нового дня рождения
         $origin = new DateTime(date('Y-m-d'));
         $bDay = new DateTime($bDay);
-        $formatNextYear = 'P' . ++$age . 'Y';
+        $formatNextYear = 'P' . ((int)$age + 1) . 'Y';
         $target = $bDay->add(new DateInterval($formatNextYear));
         $interval = $origin->diff($target);
         [$m, $d] = explode(',', $interval->format('%m,%d'));
@@ -103,7 +104,7 @@ class PageM
 
     public function getStar()
     {
-        $query = 'SELECT s.id, s.name, s.main_photo, s.location, s.person_descr, s.content, s.b_day FROM stars AS s';
+        $query = 'SELECT s.id, s.name, s.main_photo, s.location, s.person_descr, s.content, s.b_day, s.profession FROM stars AS s';
         $res = PdoM::Instance()->Select($query);
         foreach ($res as $key => $val) {
             return $val;

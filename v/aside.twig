@@ -4,7 +4,7 @@
     <div class="bl_table">
         <div>
             <div class="aside__person_img" style="background-image: url(../assets/img/{{ starInfo.main_photo }});"></div>
-            <div class="aside__person_name">{{ starInfo.name }}<span>актриса</span></div>
+            <div class="aside__person_name">{{ starInfo.name }}<span>{{ starInfo.profession }}</span></div>
             <div class="aside__person_data">
                 <ul>
                     <li>
@@ -13,7 +13,7 @@
                     </li>
                     <li>
                         <i class="i_icon-2"></i>
-                        <p>{{ starBdayInfo.b_day }},&nbsp;{{ starBdayInfo.age }} лет</p>
+                        <p>{{ starBdayInfo.b_day }},&nbsp;{{ starBdayInfo.age }}</p>
                         <span>{{ starBdayInfo.arrival }}</span>
                     </li>
                 </ul>
