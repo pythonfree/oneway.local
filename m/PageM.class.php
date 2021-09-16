@@ -67,7 +67,7 @@ class PageM
         return PdoM::Instance()->Select($query);
     }
 
-    public function getBday($id)
+    public function getBdayInfo($id)
     {
         $query = "SELECT s.b_day FROM stars AS s WHERE id='$id'";
         $res = PdoM::Instance()->Select($query);
@@ -75,10 +75,12 @@ class PageM
         $bDay = $res[0]['b_day'];
         $rbDay = rus_date("d F Y", strtotime($bDay));
 
-//        $age = date('Y') - date('Y', strtotime($bDay));
-//        var_dump($age);die;
+        $origin = new DateTime($bDay);
+        $target = new DateTime(date('Y-m-d'));
+        $interval = $origin->diff($target);
+        $age = $interval->format('%y');
 
-        return ['b_day' => $rbDay];
+        return ['b_day' => $rbDay, 'age' => $age];
     }
 
     public function getStar()
