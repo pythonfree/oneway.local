@@ -72,15 +72,33 @@ class PageM
         $query = "SELECT s.b_day FROM stars AS s WHERE id='$id'";
         $res = PdoM::Instance()->Select($query);
 
+        //форматируем дату рождения
         $bDay = $res[0]['b_day'];
         $rbDay = rus_date("d F Y", strtotime($bDay));
 
+        //вычисляем возраст в годах
         $origin = new DateTime($bDay);
         $target = new DateTime(date('Y-m-d'));
         $interval = $origin->diff($target);
         $age = $interval->format('%y');
 
-        return ['b_day' => $rbDay, 'age' => $age];
+        //вычисляем сколько осталось месяцев и дней до нового дня рождения
+        $origin = new DateTime(date('Y-m-d'));
+        $bDay = new DateTime($bDay);
+        $formatNextYear = 'P' . ++$age . 'Y';
+        $target = $bDay->add(new DateInterval($formatNextYear));
+        $interval = $origin->diff($target);
+        [$m, $d] = explode(',', $interval->format('%m,%d'));
+
+        if (!$m && !$d) {
+            $arrival = "Поздравляем с днем рождения!";
+        } else {
+            $m = monthAppend($m);
+            $d = dayAppend($d);
+            $arrival = "{$m} и {$d} до ДР";
+        }
+
+        return ['b_day' => $rbDay, 'age' => $age, 'arrival' => $arrival];
     }
 
     public function getStar()
