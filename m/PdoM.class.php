@@ -61,49 +61,4 @@ class PdoM
 
         return $this->db->lastInsertId();
     }
-
-    public function Update($table, $object, $where)
-    {
-        $sets = array();
-
-        foreach ($object as $key => $value) {
-            $sets[] = "$key='$value'";
-
-            if ($value === NULL) {
-                $object[$key] = 'NULL';
-            }
-        }
-
-        $sets_s = implode(',', $sets);
-        $query = "UPDATE $table SET $sets_s WHERE $where";
-        $q = $this->db->prepare($query);
-        $q->execute($object);
-
-        if ($q->errorCode() != PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            die($info[2]);
-        }
-
-        return $q->rowCount();
-    }
-
-    public function Delete($table, $where)
-    {
-        $query = "DELETE FROM $table WHERE $where";
-        $q = $this->db->prepare($query);
-        $q->execute();
-
-        if ($q->errorCode() != PDO::ERR_NONE) {
-            $info = $q->errorInfo();
-            die($info[2]);
-        }
-
-        return $q->rowCount();
-    }
-
-    public function lastIndex()
-    {
-        $index = $this->db->lastInsertId();
-        return $index;
-    }
 }

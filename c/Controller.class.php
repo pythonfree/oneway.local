@@ -12,10 +12,4 @@ abstract class Controller
         $this->$method();
         $this->render();
     }
-
-    protected function isPost()
-    {
-        return $_SERVER['REQUEST_METHOD'] == 'POST';
-    }
-
 }
