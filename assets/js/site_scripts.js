@@ -14,4 +14,23 @@ $(document).ready(function(){
 	$(".content__slider_pag span:last-child").click(function(){
 		fotorama.show('>');
 	});
+
+	///////////////////////////////////
+	$('input').click(function (e) {
+		var idlike = $(this)[0]['id'];
+		idlike = parseInt(idlike.match(/\d+/))
+		addLike(idlike);
+	});
+
+	function addLike(id) {
+		$.ajax({
+			type: 'GET',
+			url: 'index.php?class=like&method=add',
+			data: {id},
+			success: function(){
+				$('#heart-' + id).load('index.php #heart-' + id);
+			}
+		})
+	}
+
 });

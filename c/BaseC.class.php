@@ -16,6 +16,7 @@ abstract class BaseC extends Controller
     protected $content;
     protected $message;
     protected $page;
+    protected $like;
 
     public function before()
     {
@@ -24,7 +25,8 @@ abstract class BaseC extends Controller
         $this->twig = new Twig_Environment($this->loader);
         $this->content = '';
         $this->message = '';
-        $this->page = new PageM(); // создается экземпляр модели страницы
+        $this->page = new PageM();
+        $this->like = new LikeM();
     }
 
     public function render()

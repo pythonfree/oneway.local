@@ -35,7 +35,7 @@ class PdoM
 
     public function Insert($table, $object)
     {
-        $columns = array();
+        $columns = [];
 
         foreach ($object as $key => $value) {
             $columns[] = $key;
