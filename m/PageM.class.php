@@ -58,12 +58,14 @@ class PageM
         }
     }
 
-    public function getPhoto()
+    public function getPhoto($ip)
     {
-        $query = 'SELECT p.photo, l.id_photo, COUNT(l.id_photo) AS liked
-                    FROM photos AS p
-                    JOIN likes AS l ON p.id = l.id_photo
-                    GROUP BY l.id_photo';
+//        $query = 'SELECT p.photo, p.id, (SELECT COUNT(*) FROM likes AS l WHERE l.id_photo = p.id) AS liked FROM photos AS p';
+        $query = "SELECT p.photo, p.id, 
+                    (SELECT COUNT(*) FROM likes AS l WHERE l.id_photo = p.id) AS liked, 
+                    (SELECT l.ip FROM likes AS l WHERE l.ip = '$ip' AND l.id_photo = p.id) AS `checked` 
+                    FROM photos AS p";
+
         return PdoM::Instance()->Select($query);
     }
 

@@ -17,7 +17,8 @@ $(document).ready(function(){
 
 	///////////////////////////////////
 	$('input').click(function (e) {
-		var idlike = $(this)[0]['id'];
+		// e.preventDefault();
+		let idlike = $(this)[0]['id'];
 		idlike = parseInt(idlike.match(/\d+/))
 		addLike(idlike);
 	});
@@ -32,5 +33,5 @@ $(document).ready(function(){
 			}
 		})
 	}
-
+	///////////////////////////////////
 });
