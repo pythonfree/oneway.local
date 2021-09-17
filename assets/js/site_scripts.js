@@ -13,17 +13,23 @@ $(document).ready(function(){
 	});
 	$(".content__slider_pag span:last-child").click(function(){
 		fotorama.show('>');
+
+		addEventClickInput();
 	});
 
-	///////////////////////////////////
-	$('input').click(function (e) {
-		// e.preventDefault();
-		let idlike = $(this)[0]['id'];
-		idlike = parseInt(idlike.match(/\d+/))
-		addLike(idlike);
-	});
+	function addEventClickInput() {
+		let inputs = document.querySelectorAll('input');
+		for (input of inputs) {
+			let idlike = input.id;
+			idlike = parseInt(idlike.match(/\d+/));
+			input.addEventListener('click', addLike);
+		}
+	}
+	addEventClickInput();
 
-	function addLike(id) {
+	function addLike(e) {
+		let id = e.target.id;
+		id = parseInt(id.match(/\d+/))
 		$.ajax({
 			type: 'GET',
 			url: 'index.php?class=like&method=add',
@@ -33,5 +39,5 @@ $(document).ready(function(){
 			}
 		})
 	}
-	///////////////////////////////////
+
 });
